@@ -8,6 +8,13 @@ def npm_start():
 
 
 
-class div:
+class Tag:
+    def __init__(self):
+        pass
+
+
+class Div(Tag):
     def __init__(self,class_name):
         self.class_name=class_name
+        
+        
