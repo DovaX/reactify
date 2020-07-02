@@ -49,16 +49,28 @@ for i in range(len(rows)-1,-1,-1):
 ########### Objects ###############      
 
 class Tag:
-    def __init__(self,tag_name,class_name=None):
+    def __init__(self,tag_name,class_name=None,attributes=None):
+        global active_js_program
+        self.active_js_program=active_js_program
         self.tag_name=tag_name
         self.class_name=class_name
         self.tag_tree=[]
+        self.attributes=attributes #dict
         
     def __str__(self):
+        
+        
+        attribute_string=""
+        if self.attributes is not None:
+            attribute_string=" "
+            for k,v in self.attributes.items():
+                attribute_string+=k+'="'+v+'"'
+                
+        
         if self.class_name is not None:
-            statement='<'+self.tag_name+' className="'+self.class_name+'">'
+            statement='<'+self.tag_name+' className="'+self.class_name+'"'+attribute_string+'>'
         else:
-            statement="<"+self.tag_name+">"
+            statement="<"+self.tag_name+attribute_string+">"
         return(statement)
     
     def end(self):
@@ -68,7 +80,7 @@ class Tag:
     
     
 class Div(Tag):
-    def __init__(self,class_name=None):
+    def __init__(self,class_name=None,attributes=None):
         super().__init__("div")
     
     
@@ -119,6 +131,23 @@ class Import:
 
 
 
+class JSProgram:
+    def __init__(self):
+        self.list_of_statements=[]
+        
+    def activate(self):
+        global active_js_program
+        active_js_program=self
+        
+
+
+
+app_js=JSProgram()
+app_js.activate()
+
+
+
+
 
 
 imports=[]
@@ -139,20 +168,23 @@ print(func)
 ret=JSReturn()
 print(ret)
     
-div1=Div("Apppp")
+div1=Div("App")
 print(div1)
 
 header=Tag("header","App-header")
 print(header)
-img1=Tag("img","App-logo")
+img1=Tag("img","App-logo",{"src":"{logo}",
+                           "alt":'"logo"'
+                           
+                           })
 print(img1)
 img1.end()
 p=Tag("p")
 print(p)
-print("Edit")
+print("Edit <code>src/App.js</code> and save to reload.")
 p.end()
 
-a=Tag("a","App-link")
+a=Tag("a","App-link",{"href":'https://reactjs.org',"target":'_blank','rel':'noopener noreferrer'})
 print(a)
 print("Learn React")
 
@@ -167,3 +199,10 @@ div1.end()
 ret.end()    
 func.end()
 func.export()
+
+
+local_variables=locals()
+items=local_variables.items()
+for k,v in items:
+    if type(exec(k))==type(Tag):
+        print(k,v)
