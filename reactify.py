@@ -157,8 +157,6 @@ imports.append(Import("'./App.css'"))
 
 
 
-
-
 for i,imp in enumerate(imports):
     print(imp)
 
@@ -196,13 +194,18 @@ header.end()
 
 
 div1.end()
-ret.end()    
+ret.end()
 func.end()
 func.export()
 
 
-local_variables=locals()
-items=local_variables.items()
-for k,v in items:
-    if type(exec(k))==type(Tag):
-        print(k,v)
+
+
+#local_variables=locals()
+#items=local_variables.items()
+#for k,v in items:
+#    if type(exec(k))==type(Tag):
+#        print(k,v)
+
+
+
