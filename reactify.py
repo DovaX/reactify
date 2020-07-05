@@ -1,5 +1,20 @@
 import os
 
+
+class JSProgram:
+    def __init__(self):
+        self.list_of_statements=[]
+        
+    def activate(self):
+        global active_js_program
+        active_js_program=self
+        
+
+app_js=JSProgram()
+app_js.activate()
+
+
+
 def npm_start():
     try:
         os.chdir(".//my-app")
@@ -89,6 +104,8 @@ class Div(Tag):
 
 class JSFunction:
     def __init__(self,function_name):
+        global active_js_program
+        self.active_js_program=active_js_program
         self.statement="function "+function_name+"() {"
     
     def __str__(self):
@@ -108,6 +125,8 @@ class JSFunction:
     
 class JSReturn:
     def __init__(self):
+        global active_js_program
+        self.active_js_program=active_js_program
         self.statement="return ("
         
     def __str__(self):
@@ -120,6 +139,8 @@ class JSReturn:
         
 class Import:
     def __init__(self,what,from_where=None):
+        global active_js_program
+        self.active_js_program=active_js_program
         if from_where is not None:
             self.statement="import "+what+" from "+from_where+";"
         else:
@@ -129,21 +150,6 @@ class Import:
         return(self.statement)
             
 
-
-
-class JSProgram:
-    def __init__(self):
-        self.list_of_statements=[]
-        
-    def activate(self):
-        global active_js_program
-        active_js_program=self
-        
-
-
-
-app_js=JSProgram()
-app_js.activate()
 
 
 
