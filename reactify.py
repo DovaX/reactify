@@ -72,6 +72,9 @@ class Tag:
         self.tag_tree=[]
         self.attributes=attributes #dict
         
+        #active_js_program.list_of_statements.append(self.statement)
+        
+    
     def __str__(self):
         
         
@@ -107,6 +110,7 @@ class JSFunction:
         global active_js_program
         self.active_js_program=active_js_program
         self.statement="function "+function_name+"() {"
+        active_js_program.list_of_statements.append(self.statement)
     
     def __str__(self):
         return(self.statement)
@@ -128,6 +132,7 @@ class JSReturn:
         global active_js_program
         self.active_js_program=active_js_program
         self.statement="return ("
+        active_js_program.list_of_statements.append(self.statement)
         
     def __str__(self):
         return(self.statement)
@@ -145,6 +150,9 @@ class Import:
             self.statement="import "+what+" from "+from_where+";"
         else:
             self.statement="import "+what+";"
+            
+        
+        active_js_program.list_of_statements.append(self.statement)
             
     def __str__(self):
         return(self.statement)
@@ -205,6 +213,8 @@ func.end()
 func.export()
 
 
+
+print(app_js.list_of_statements)
 
 
 #local_variables=locals()
