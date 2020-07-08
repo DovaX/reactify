@@ -72,10 +72,6 @@ class Tag:
         self.tag_tree=[]
         self.attributes=attributes #dict
         
-        #active_js_program.list_of_statements.append(self.statement)
-        
-    
-    def __str__(self):
         
         
         attribute_string=""
@@ -89,11 +85,19 @@ class Tag:
             statement='<'+self.tag_name+' className="'+self.class_name+'"'+attribute_string+'>'
         else:
             statement="<"+self.tag_name+attribute_string+">"
-        return(statement)
+        
+        self.statement=statement
+        
+        active_js_program.list_of_statements.append(self.statement)
+        
+    
+    def __str__(self):
+        return(self.statement)
     
     def end(self):
-        print("</"+self.tag_name+">")
-        return("</"+self.tag_name+">")
+        end_statement="</"+self.tag_name+">"
+        active_js_program.list_of_statements.append(end_statement)
+        return(end_statement)
     
     
     
@@ -116,12 +120,14 @@ class JSFunction:
         return(self.statement)
         
     def end(self):
-        print("}")
-        return("}")
+        end_statement="}"
+        active_js_program.list_of_statements.append(end_statement)
+        return(end_statement)
     
     def export(self):
-        print("export default App;")
-        return("export default App;")
+        export_statement="export default App;"
+        active_js_program.list_of_statements.append(export_statement)
+        return(export_statement)
     
     
     
@@ -138,9 +144,9 @@ class JSReturn:
         return(self.statement)
     
     def end(self):
-        print(");")
-        return(");")
-
+        end_statement=");"
+        active_js_program.list_of_statements.append(end_statement)
+        return(end_statement)
         
 class Import:
     def __init__(self,what,from_where=None):
@@ -150,8 +156,6 @@ class Import:
             self.statement="import "+what+" from "+from_where+";"
         else:
             self.statement="import "+what+";"
-            
-        
         active_js_program.list_of_statements.append(self.statement)
             
     def __str__(self):
@@ -159,63 +163,35 @@ class Import:
             
 
 
-
-
-
-
-
-imports=[]
-imports.append(Import("React","'react'"))
-imports.append(Import("logo","'./logo.svg'"))
-imports.append(Import("'./App.css'"))
-
-
-
-for i,imp in enumerate(imports):
-    print(imp)
+Import("React","'react'")
+Import("logo","'./logo.svg'")
+Import("'./App.css'")
 
 func=JSFunction("App")
-print(func)
 
 ret=JSReturn()
-print(ret)
     
 div1=Div("App")
-print(div1)
 
 header=Tag("header","App-header")
-print(header)
+
 img1=Tag("img","App-logo",{"src":"{logo}",
-                           "alt":'"logo"'
-                           
+                           "alt":"logo"                           
                            })
-print(img1)
 img1.end()
 p=Tag("p")
-print(p)
-print("Edit <code>src/App.js</code> and save to reload.")
 p.end()
 
 a=Tag("a","App-link",{"href":'https://reactjs.org',"target":'_blank','rel':'noopener noreferrer'})
-print(a)
-print("Learn React")
-
 a.end()
 
-
 header.end()
-
-
-
 div1.end()
 ret.end()
 func.end()
 func.export()
 
-
-
 print(app_js.list_of_statements)
-
 
 #local_variables=locals()
 #items=local_variables.items()
