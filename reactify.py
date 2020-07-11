@@ -9,6 +9,11 @@ class JSProgram:
         global active_js_program
         active_js_program=self
         
+    def generate_file(self,filename):
+        with open(filename,"w") as file:
+            for i,line in enumerate(self.list_of_statements):
+                file.write(line+"\n")
+        
 
 app_js=JSProgram()
 app_js.activate()
@@ -34,14 +39,12 @@ def npx_create_react_app():
 ############ DOGUI ##############        
 import dogui.dogui_core as dg
 
-
 #gui1=dg.GUI()
 
 #btn1=dg.Button(gui1.window,"npm start",npm_start,1,1)
 #btn2=dg.Button(gui1.window,"npx create react app",npx_create_react_app,1,2)
 #btn2=dg.Button(gui1.window,"npm install",npm_install,1,3)
 #gui1.build_gui()
-
 
 ########### Parsing ##############
 
@@ -192,6 +195,8 @@ func.end()
 func.export()
 
 print(app_js.list_of_statements)
+
+app_js.generate_file("test.js")
 
 #local_variables=locals()
 #items=local_variables.items()
