@@ -19,7 +19,6 @@ app_js=JSProgram()
 app_js.activate()
 
 
-
 def npm_start():
     try:
         os.chdir(".//my-app")
@@ -197,6 +196,9 @@ func.export()
 print(app_js.list_of_statements)
 
 app_js.generate_file("test.js")
+
+
+print(app_js.list_of_statements)
 
 #local_variables=locals()
 #items=local_variables.items()
