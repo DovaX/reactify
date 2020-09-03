@@ -13,7 +13,9 @@ class JSProgram:
         with open(filename,"w") as file:
             for i,line in enumerate(self.list_of_statements):
                 file.write(line+"\n")
-        
+                
+                
+
 
 app_js=JSProgram()
 app_js.activate()
@@ -106,6 +108,11 @@ class Tag:
 class Div(Tag):
     def __init__(self,class_name=None,attributes=None):
         super().__init__("div")
+    
+    
+class Span(Tag):
+    def __init__(self,class_name=None,attributes=None):
+        super().__init__("span")
     
     
 
