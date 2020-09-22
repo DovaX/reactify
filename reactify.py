@@ -103,20 +103,13 @@ class Tag:
         active_js_program.list_of_statements.append(end_statement)
         return(end_statement)
     
-    
-    
 class Div(Tag):
     def __init__(self,class_name=None,attributes=None):
         super().__init__("div")
     
-    
 class Span(Tag):
     def __init__(self,class_name=None,attributes=None):
         super().__init__("span")
-    
-    
-
-
 
 class JSFunction:
     def __init__(self,function_name):
@@ -137,10 +130,6 @@ class JSFunction:
         export_statement="export default App;"
         active_js_program.list_of_statements.append(export_statement)
         return(export_statement)
-    
-    
-    
-        
     
 class JSReturn:
     def __init__(self):
